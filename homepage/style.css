@@ -1,0 +1,378 @@
+/* your css here */
+* {
+  box-sizing: border-box;
+}
+body {
+  background-color: #101010;
+  /* background-color: #191919; */
+}
+h3 {
+  font-size: 150%;
+}
+
+/* ######### Headings ############# */
+.hero {
+  background-color: #101010;
+  /* background-color: #191919; */
+}
+nav {
+  position: relative;
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+  padding: 2.5rem 8% 8%;
+}
+.about-text span {
+  color: #ff7f11;
+}
+.logo {
+  color: beige;
+  font-size: 250%;
+  letter-spacing: 0.01rem;
+  cursor: pointer;
+}
+
+.logo span {
+  color: #ff7f11;
+}
+
+nav ul li {
+  font-size: 150%;
+  list-style-type: none;
+  display: inline-block;
+  padding: 1rem 2.5rem;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+nav ul li a:hover {
+  color: #ff7f11;
+  transition: 0.4s;
+}
+
+.btn {
+  background-color: #ff7f11;
+  color: white;
+  text-decoration: none;
+  border: 0.125rem solid transparent;
+  font-weight: bold;
+  padding: 0.4em 1em;
+  border-radius: 2.5rem;
+  transition: trasform 0.4s;
+  font-size: 120%;
+}
+
+.btn:hover {
+  color: #ff7f11;
+  border: #ff7f11 0.125rem solid;
+  background-color: #101010;
+  /* background-color: #191919; */
+  transform: scale(1.2);
+}
+
+/* ######### About Me ######## */
+.about {
+  width: 100%;
+  padding: 5.25em 0;
+  background-color: #101010;
+  /* background-color: #191919; */
+}
+
+.about img {
+  height: auto;
+  width: 40%;
+}
+.about-text {
+  width: 35em;
+}
+.main {
+  width: 70rem;
+  max-width: 100%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.about-text h2 {
+  color: white;
+  font-size: 400%;
+  text-transform: capitalize;
+  margin: 0.5em;
+}
+.about-text h3 {
+  color: white;
+  letter-spacing: 0.125rem;
+
+  margin: 2rem;
+}
+
+.about-text p {
+  color: white;
+  letter-spacing: 0.0625em;
+  line-height: 1.9rem;
+  font-size: 120%;
+  margin: 3rem;
+}
+
+button {
+  background-color: #ff7f11;
+  color: white;
+  text-decoration: none;
+  border: 0.125rem solid transparent;
+  font-weight: bold;
+  padding: 0.75rem;
+  border-radius: 2rem;
+  transition: 0.4s;
+  font-size: 120%;
+  margin: 0 3em;
+}
+button:hover {
+  background-color: transparent;
+  border: 0.126rem solid #ff7f11;
+  color: #ff7f11;
+  transform: scale(1.2);
+}
+
+/* ######## Education & WorkExperience ######### */
+.service_ {
+  background-color: #101010;
+  width: 100%;
+  padding: 6.2rem 0;
+}
+.title h2 {
+  color: white;
+  font-size: 400%;
+  width: 100%;
+  margin: 2rem auto;
+  text-align: center;
+}
+
+.box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+}
+.card {
+  width: 45%;
+  height: auto;
+  /* width: 80em; */
+  /* height: auto; */
+
+  padding: 1.2rem;
+  background: #ff7f11;
+  border-radius: 1.2rem;
+  margin: 1rem auto;
+  position: relative;
+  overflow: hidden;
+  text-align: left;
+}
+.school-text {
+  margin: 1.2rem 1.2rem 2rem;
+  padding: 0.6rem;
+  font-size: 120%;
+}
+.card h3 {
+  margin: 2rem;
+  padding: 0.6rem;
+}
+
+.school-text span {
+  font-size: 120%;
+  font-weight: bold;
+}
+
+/* ########### Portfolio styles ############## */
+.portfolio-section {
+  background-color: #101010;
+  /* background-color: #191919; */
+
+  margin: 4em;
+}
+.portfolio-section p {
+  padding: 2em;
+  font-size: 120%;
+}
+
+.portfolio-section h2 {
+  text-align: center;
+  color: white;
+  font-size: 400%;
+  text-transform: capitalize;
+  margin-bottom: 1.2rem;
+}
+.portfolio_container {
+  display: grid;
+
+  grid-template-columns: 50% 50%;
+  grid-gap: 2em;
+  width: 100%;
+
+  padding: 0;
+}
+.item {
+  padding: 1rem;
+  border-radius: 1.5rem;
+}
+
+.grid_1 {
+  background-color: #ff7f11;
+  color: #101010;
+}
+
+.grid_2 {
+  background-color: #ff7f11;
+  color: #101010;
+}
+
+.grid_3 {
+  background-color: #ff7f11;
+  color: #101010;
+}
+
+.grid_4 {
+  background-color: #ff7f11;
+  color: #101010;
+}
+
+.portfolio-section .portfolio_container .port_img {
+  width: 100%;
+
+  padding: 2em;
+
+  float: left;
+  margin-right: 1em;
+  border-radius: 2em;
+}
+.portfolio-section h3 {
+  padding: 2em;
+}
+
+/* ################## Media query ########## */
+/* when screen size is less than 750px flex wrap items */
+
+@media (max-width: 750px) {
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+
+  body {
+    justify-content: center;
+    width: 100%;
+  }
+  /* about */
+  .hero {
+    width: 100%;
+  }
+  .about-text {
+    padding: 0.125em;
+    margin: 0;
+    width: 100%;
+  }
+  .about-text p {
+    padding: 0.5em;
+    margin: 0.2em;
+  }
+
+  h2 {
+    font-size: 100%;
+  }
+  /* education */
+  .service_ {
+    padding: 0;
+    margin: 0;
+  }
+  .main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .box {
+    display: grid;
+    width: 100%;
+  }
+  .card {
+    margin: 0.2em;
+    padding: 0;
+    width: 100%;
+  }
+  /* portfolio */
+  .portfolio-section {
+    padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+    margin: 0.5rem 0.5rem 0.5rem 0.5rem;
+  }
+  .portfolio-section {
+    padding: 0.1em;
+  }
+  .portfolio_container {
+    grid-template-columns: 100%;
+    margin: 0;
+  }
+  .item {
+    width: 100%;
+    height: auto;
+
+    padding: 0;
+    background: #ff7f11;
+    border-radius: 1.2rem;
+    margin: 0.2rem;
+    position: relative;
+    overflow: hidden;
+    text-align: left;
+  }
+  .portfolio-section .portfolio_container .port_img {
+    width: 100%;
+    padding: 0.25;
+    margin-bottom: 1em;
+
+    float: none;
+  }
+}
+/* ###################### Here are the changes I made for a better typography*/
+
+/* ########## when screen size is over 1300px ########### */
+@media (min-width: 1300px) {
+  .portfolio-section .portfolio_container .port_img {
+    width: 50%;
+    padding: 0.25;
+    margin-bottom: 1em;
+    float: left;
+  }
+  /* ###### Print ########## */
+  @media print {
+    body {
+      font-size: 12pt;
+    }
+    nav,
+    footer {
+      display: none;
+    }
+    h1,
+    h2,
+    h3 {
+      break-after: avoid-page;
+    }
+    a[href^="http"]::after {
+      content: "(" attr(href) ")";
+    }
+    body,
+    p,
+    h2,
+    h3,
+    * {
+      color: black;
+    }
+    .about-text p {
+      color: black;
+    }
+  }
+}

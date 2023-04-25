@@ -1,0 +1,95 @@
+.hero {
+  background-color: #101010;
+  width: 100%;
+  margin: 0;
+}
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 45px 8% 8%;
+}
+label {
+  font-size: 23px;
+  color: #101010; /* Changed color to match homepage color */
+}
+p {
+  font-size: 28px;
+  color: #101010; /* Changed color to match homepage color */
+}
+input {
+  font-size: 20px;
+  align-items: justify;
+  width: 250px;
+  height: 20px;
+  color: #101010; /* Changed color to match homepage color */
+}
+.logo {
+  color: beige;
+  font-size: 35px;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+.logo span {
+  color: #ff7f11;
+}
+
+nav ul li {
+  list-style-type: none;
+  display: inline-block;
+  padding: 10px 25px;
+}
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+nav ul li a:hover {
+  color: #ff7f11;
+  transition: 0.4s;
+}
+nav .btn,
+button {
+  color: #101010;
+  background-color: #ff7f11;
+  padding: 10px 25px;
+  margin: 10px 15px;
+  border-radius: 30px;
+  font-size: 20px;
+}
+
+nav .btn:hover {
+  background-color: #101010;
+  color: #ff7f11;
+  border: #ff7f11 solid 2px;
+}
+
+.message_container {
+  display: grid;
+  margin: 200px;
+  line-height: 1.5;
+}
+
+.message_container textarea {
+  width: 300px;
+  height: 200px;
+  font-size: 1.3em;
+}
+input {
+  margin-bottom: 1em;
+}
+
+@media (max-width: 700px) {
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+  .message_container {
+    align-items: left;
+    margin: 0.2em;
+    padding: 0.2em;
+  }
+}

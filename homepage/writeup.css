@@ -1,0 +1,81 @@
+/* Improvement 2: Modern and legible typeface */
+body {
+  font-family: "Roboto", sans-serif;
+}
+
+/* Improvement 1: Increased base font size */
+html {
+  font-size: 18px;
+}
+
+/* Improvement 4: Hierarchy to headings */
+h1,
+h2,
+h3 {
+  font-weight: 600;
+}
+
+h1 {
+  font-size: 2.5rem;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+h3 {
+  font-size: 1.5rem;
+}
+
+/* Improvement 3: Adjusted line-height */
+p,
+li,
+h1,
+h2,
+h3 {
+  line-height: 1.6;
+}
+
+/* Improvement 5: Enhanced color contrast */
+body {
+  color: #333;
+}
+
+a {
+  color: #1a73e8;
+}
+
+/* Improvement 6: Text alignment */
+h2,
+h3 {
+  text-align: center;
+}
+
+p {
+  text-align: left;
+}
+
+/* Improvement 7: Hyperlinks hover effect */
+a:hover {
+  text-decoration: underline;
+}
+
+/* Improvement 8: Spacing between elements */
+p + p {
+  margin-top: 1rem;
+}
+
+/* Improvement 9: Letter-spacing for uppercase text */
+h1,
+h2,
+h3,
+button {
+  letter-spacing: 0.05em;
+}
+
+/* Improvement 10: Responsive typography */
+@media (max-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
