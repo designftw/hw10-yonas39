@@ -1,0 +1,37 @@
+* {
+  background-color: #b4fad8;
+}
+.setting-home {
+  display: block;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  /* box-shadow: 0.05em solid gray; */
+  border-radius: 0.25em;
+  margin: 3em;
+  padding: 1em;
+}
+.setting-home-primaryLanguage {
+  display: block;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  /* box-shadow: 0.05em solid gray; */
+  border-radius: 0.25em;
+  margin: 2em 2em 0 2em;
+  padding: 1em;
+  align-items: center;
+}
+select,
+option {
+  font-size: 1.5em;
+  text-align: center;
+  align-items: center;
+  margin-left: 7em;
+  margin-bottom: 2em;
+}
+h2 {
+  margin-top: 4em;
+  margin-bottom: 3em;
+  font-size: 3em;
+  text-align: center;
+}
+li {
+  font-size: 2em;
+}

@@ -1,12 +1,173 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Change me</title>
-</head>
-<body>
-  
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Change me</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- title -->
+      <h1>User Testing on Figma Prototype</h1>
+
+      <!-- Write Introduction here -->
+      <article class="introduction">
+        <h2>Introduction</h2>
+        <p>
+          This user testing exercise aimed to assess the usability and efficacy
+          of three distinct design concepts for a chat/messaging application. To
+          achieve this, I asked multiple users to engage with the designs while
+          I monitored their interactions and provided assistance where
+          necessary. I will use the information gathered from this user testing
+          to enhance the app's design and functionality.
+        </p>
+      </article>
+
+      <!-- here write about design_1 test  -->
+      <article>
+        <h3>Design 1: Long press</h3>
+        <p>
+          In this task, I wanted to test how easy it is for the user to
+          translate an incoming message from a foreign language to a language of
+          their choice using the long press option. I wanted to see if users
+          found the long press option intuitive and easy to use and could select
+          the language they wanted to translate from the options list.
+        </p>
+        <p>
+          Some users initially needed clarification about the selection method
+          during the user testing session. I observed the long press option was
+          not intuitive for all users. I discovered that some users prefer to
+          see a language dropdown instead of a long-press option menu.
+          Meanwhile, users familiar with the long press option successfully
+          translate the incoming message after a few attempts.
+        </p>
+      </article>
+
+      <!-- here write about design_2 test  -->
+      <article>
+        <h3>Design-2: Users Choose a Language Preference in the Setting</h3>
+        <p>
+          The purpose of this task was to test how easy it is for users to set
+          up their language preferences in the app settings. Once users set
+          their preferences in the setting, the app will translate all incoming
+          messages to their preferred language. I aimed to determine whether
+          users found the language preference setting intuitive and easy to
+          navigate and whether the app would translate incoming messages
+          according to user preferences.
+        </p>
+        <p>
+          I discovered from the user testing session that some users find the
+          settings and locating the language preferences easier, except for some
+          vague labels of language setting terminologies. I plan to redefine the
+          settings labels to make them more user-friendly and intuitive. Most
+          users could locate the language preference setting, successfully set
+          up their language preferences, and test the translation feature.
+          Additionally, users found the detected language option helpful,
+          allowing them to see the language of the incoming message, despite its
+          confusing labeling. Based on the users' feedback, I plan to Improve
+          labeling and make it more intuitive than it currently is.
+        </p>
+      </article>
+
+      <!-- here write about design_3 test  -->
+      <article>
+        <h3>
+          Design-3: Translate Incoming and Outgoing Message Using Drop Down Menu
+        </h3>
+        <p>
+          I wanted to test how easy it is for the user to translate an incoming
+          and outgoing message from their preferred language to a foreign
+          language using the dropdown option next to the text input box. I
+          wanted to see if users found the dropdown option convenient and easy
+          to use.
+        </p>
+        <p>
+          During the user testing session, I observe Users found the dropdown
+          option convenient and easy to use. However, some users needed
+          clarification about how the language detection feature worked. I plan
+          to add a tooltip or help feature to explain the language detection
+          feature. Users who could select the language they wanted to translate
+          to could translate their outgoing and incoming messages successfully.
+        </p>
+      </article>
+
+      <!-- space for user insight and plans for change -->
+      <article>
+        <h2>Insights and Plans for Changes</h2>
+        <p>
+          Overall, users preferred Design 2 over the other two designs, allowing
+          them to set their language preferences once and have all incoming
+          messages automatically translated into their preferred language.
+          However, users also found Design 3 convenient for translating incoming
+          messages and outgoing messages into prefered language and a foreign
+          language respectively.
+        </p>
+        <p>
+          Based on the user testing insights, I plan to make the following
+          changes on the design and functionality of the app:
+        </p>
+        <ul>
+          <li>
+            Redesign the settings page to make it more readable, easier to
+            understand, user-friendly and intuitive. I also plan to add a
+            shortcut to the language preferences on the main screen for easier
+            access.
+          </li>
+          <li>
+            Add a search feature to the list of options in the dropdown menu for
+            easier navigation and selection of languages and also improve
+            efficiency.
+          </li>
+          <li>
+            Add a tooltip or help feature to explain the language detection
+            feature to users who may be unfamiliar with it.
+          </li>
+          <li>
+            Redesign the long press option to include a language dropdown
+            instead of a list of options to make it more intuitive and
+            user-friendly.(I may drop this option as its less prefered by the
+            users)
+          </li>
+        </ul>
+      </article>
+      <h3>Video Demo</h3>
+      <!-- user testing video demo -->
+      <div class="video-demo">
+        <video controls>
+          <source src="example.mov" type="video/quicktime" />
+          <source src="example.mp4" type="video/mp4" />
+          <source src="example.webm" type="video/webm" />
+        </video>
+        <video controls>
+          <source src="example.mov" type="video/quicktime" />
+          <source src="example.mp4" type="video/mp4" />
+          <source src="example.webm" type="video/webm" />
+        </video>
+        <video controls>
+          <source src="example.mov" type="video/quicktime" />
+          <source src="example.mp4" type="video/mp4" />
+          <source src="example.webm" type="video/webm" />
+        </video>
+      </div>
+
+      <!-- appendex Raw -->
+      <h3>Raw Note</h3>
+      <div class="images">
+        <img
+          src="image/IMG_1772.PNG"
+          alt="Design-1 user testing observation note screenshot"
+        />
+        <img
+          src="image/IMG_1773.PNG"
+          alt="Design-2 user testing observation note screenshot"
+        />
+        <img
+          src="image/IMG_1774.PNG"
+          alt="Design-3 user testing observation note screenshot"
+        />
+      </div>
+    </div>
+  </body>
 </html>
