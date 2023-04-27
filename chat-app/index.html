@@ -83,7 +83,21 @@
         <!-- #######################  substitue radio button with more interactive toggle ############## -->
         <!-- ##################################################################################### -->
 
-        <button
+        <div
+          class="chat-toggle"
+          :class="{ 'selected': !privateMessaging, 'has-new-messages': unreadMessages }"
+          @click="privateMessaging = false"
+        >
+          Public Chat
+        </div>
+        <div
+          class="chat-toggle"
+          :class="{ 'selected': privateMessaging, 'has-new-messages': unreadMessages }"
+          @click="privateMessaging = true"
+        >
+          Private Messaging
+        </div>
+        <!-- <button
           class="chat-toggle"
           :class="{ 'selected': !privateMessaging }"
           @click="privateMessaging = false"
@@ -96,7 +110,7 @@
           @click="privateMessaging = true"
         >
           Private Messaging
-        </button>
+        </button> -->
 
         <!-- ##################################################################################### -->
         <!-- #####################################   Change ends here ############################ -->

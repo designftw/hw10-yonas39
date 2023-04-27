@@ -39,7 +39,7 @@ const app = {
       editText: "",
       recipient: "",
       showHelp: false, // I added this
-      // errorMessage: "", // I added this
+      hasNewMessages: false, // I added this
     };
   },
 
@@ -85,6 +85,11 @@ const app = {
           .slice(0, 10)
       );
     },
+
+    // unread message
+    unreadMessages() {
+      return this.hasNewMessages || this.messages.some((msg) => !msg.read); // I added this function
+    },
   },
 
   methods: {
@@ -99,9 +104,16 @@ const app = {
     // },
 
     sendMessage(isPrivate) {
+      if (!this.messageText) {
+        // if message is empty, error message will be displayed
+        alert("Error: Message Cannot be Empty! Please write a message. ");
+        return;
+      }
+
       const message = {
         type: "Note",
         content: this.messageText,
+        read: false, // mark new messages as unread
       };
 
       if (isPrivate) {
@@ -112,6 +124,27 @@ const app = {
       }
 
       this.$gf.post(message);
+      //pay a notification sound
+      const audio = new Audio("new_text.mp3");
+
+      audio.play();
+
+      //set hasNewMessages to true when new message is sent
+      this.hasNewMessages = true;
+
+      // clear the message text after sending the messsage
+      this.messageText = "";
+    },
+
+    // mark all messages as read when the user opens the chat
+    markAllAsRead() {
+      this.hasNewMessages = false;
+      for (const message of this.messages) {
+        if (!message.read) {
+          message.read = true;
+          this.$gf.post(message); // update the message on the server
+        }
+      }
     },
 
     // #################################################################
