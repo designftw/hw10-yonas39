@@ -154,60 +154,60 @@ const app = {
     // ###################### Here are the changes I made in methods ####################
     // ##################################################################################
 
-    // sendMessage(isPrivate)
-    sendMessage(isPrivate) {
-      if (!this.messageText) {
-        // if message is empty, error message will be displayed
-        alert("Error: Message Cannot be Empty! Please write a message. ");
-        return;
-      }
+    // // sendMessage(isPrivate)
+    // sendMessage(isPrivate) {
+    //   if (!this.messageText) {
+    //     // if message is empty, error message will be displayed
+    //     alert("Error: Message Cannot be Empty! Please write a message. ");
+    //     return;
+    //   }
 
-      const message = {
-        type: "Note",
-        content: this.messageText,
-        // read: false, // mark new messages as unread
-      };
-
-      if (isPrivate) {
-        message.bto = [this.recipient];
-        message.context = [this.$gf.me, this.recipient];
-      } else {
-        message.context = [this.channel];
-      }
-
-      // clear the message text after sending the messsage
-      this.messageText = "";
-
-      this.$gf.post(message);
-      //pay a notification sound
-      const audio = new Audio("new_text.mp3");
-
-      audio.play();
-
-      //set hasNewMessages to true when new message is sent
-      this.hasNewMessages = true;
-    },
-
-    // sendMessage() {
     //   const message = {
     //     type: "Note",
     //     content: this.messageText,
+    //     // read: false, // mark new messages as unread
     //   };
 
-    //   // The context field declares which
-    //   // channel(s) the object is posted in
-    //   // You can post in more than one if you want!
-    //   // The bto field makes messages private
-    //   if (this.privateMessaging) {
+    //   if (isPrivate) {
     //     message.bto = [this.recipient];
     //     message.context = [this.$gf.me, this.recipient];
     //   } else {
     //     message.context = [this.channel];
     //   }
 
-    //   // Send!
+    //   // clear the message text after sending the messsage
+    //   this.messageText = "";
+
     //   this.$gf.post(message);
+    //   //pay a notification sound
+    //   const audio = new Audio("new_text.mp3");
+
+    //   audio.play();
+
+    //   //set hasNewMessages to true when new message is sent
+    //   this.hasNewMessages = true;
     // },
+
+    sendMessage() {
+      const message = {
+        type: "Note",
+        content: this.messageText,
+      };
+
+      // The context field declares which
+      // channel(s) the object is posted in
+      // You can post in more than one if you want!
+      // The bto field makes messages private
+      if (this.privateMessaging) {
+        message.bto = [this.recipient];
+        message.context = [this.$gf.me, this.recipient];
+      } else {
+        message.context = [this.channel];
+      }
+
+      // Send!
+      this.$gf.post(message);
+    },
 
     // mark all messages as read when the user opens the chat
     markAllAsRead() {
