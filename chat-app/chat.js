@@ -38,8 +38,18 @@ const app = {
       editID: "",
       editText: "",
       recipient: "",
+
       showHelp: false, // I added this
       hasNewMessages: false, // I added this
+      errorMessage: "", //I added this
+      requestedUsername: "", // I added this
+      requestUsernameResult: "", // I added this
+
+      searchUsername: "", // I added this
+      searchResultMessage: "", // I added this
+      searching: false, // I added this
+
+      encounteredUsernames: [], // I added this
     };
   },
 
@@ -85,6 +95,11 @@ const app = {
           .slice(0, 10)
       );
     },
+    filteredUsernames() {
+      return this.encounteredUsernames.filter((username) =>
+        username.startsWith(this.searchUsername)
+      );
+    },
 
     // unread message
     unreadMessages() {
@@ -93,16 +108,53 @@ const app = {
   },
 
   methods: {
+    async requestUsername() {
+      try {
+        const response = await this.$gf.requestUsername(this.requestedUsername);
+        if (response.success) {
+          this.requestUsernameResult = "Username successfully claimed!";
+        } else {
+          this.requestUsernameResult =
+            "Username is already taken. Please try another.";
+        }
+      } catch (error) {
+        this.requestUsernameResult =
+          "Error claiming username. Please try again.";
+      }
+    },
+    selectUsername(username) {
+      this.searchUsername = username;
+    },
+
+    async searchForActor() {
+      this.searching = true;
+      this.searchResultMessage = "";
+      try {
+        const actorID = await this.resolver.usernameToActor(
+          this.searchUsername
+        );
+        if (actorID) {
+          this.recipient = actorID;
+          this.searchResultMessage = `Found user with username: ${this.searchUsername}`;
+
+          if (!this.encounteredUsernames.includes(this.searchUsername)) {
+            this.encounteredUsernames.push(this.searchUsername);
+          }
+        } else {
+          this.searchResultMessage = "No user found with this username.";
+        }
+      } catch (error) {
+        this.searchResultMessage =
+          "Error searching for user. Please try again.";
+      } finally {
+        this.searching = false;
+      }
+    },
     // ##################################################################################
     // ###################### Here are the changes I made in methods ####################
     // ##################################################################################
-    // handleError(error) {
-    //   this.errorMessage = error.message;
-    //   setTimeout(() => {
-    //     this.errorMessage = "";
-    //   }, 5000);
-    // },
 
+    // sendMessage(isPrivate)
     sendMessage(isPrivate) {
       if (!this.messageText) {
         // if message is empty, error message will be displayed
@@ -113,7 +165,7 @@ const app = {
       const message = {
         type: "Note",
         content: this.messageText,
-        read: false, // mark new messages as unread
+        // read: false, // mark new messages as unread
       };
 
       if (isPrivate) {
@@ -123,6 +175,9 @@ const app = {
         message.context = [this.channel];
       }
 
+      // clear the message text after sending the messsage
+      this.messageText = "";
+
       this.$gf.post(message);
       //pay a notification sound
       const audio = new Audio("new_text.mp3");
@@ -131,10 +186,28 @@ const app = {
 
       //set hasNewMessages to true when new message is sent
       this.hasNewMessages = true;
-
-      // clear the message text after sending the messsage
-      this.messageText = "";
     },
+
+    // sendMessage() {
+    //   const message = {
+    //     type: "Note",
+    //     content: this.messageText,
+    //   };
+
+    //   // The context field declares which
+    //   // channel(s) the object is posted in
+    //   // You can post in more than one if you want!
+    //   // The bto field makes messages private
+    //   if (this.privateMessaging) {
+    //     message.bto = [this.recipient];
+    //     message.context = [this.$gf.me, this.recipient];
+    //   } else {
+    //     message.context = [this.channel];
+    //   }
+
+    //   // Send!
+    //   this.$gf.post(message);
+    // },
 
     // mark all messages as read when the user opens the chat
     markAllAsRead() {
@@ -206,6 +279,9 @@ const Name = {
             null
           )
       );
+    },
+    username() {
+      return this.actor.split(":").pop();
     },
   },
 

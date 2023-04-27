@@ -16,9 +16,9 @@
       <!-- ######################################### 3 ########################################### -->
       <!-- #######################  Error Reporting  ############################################### -->
       <!-- ##################################################################################### -->
-      <!-- <transition name="fade">
+      <transition name="fade">
         <div v-if="errorMessage" class="error-message">{{ errorMessage }}</div>
-      </transition> -->
+      </transition>
       <!-- #################################################################################### -->
       <!-- #######################  Error Reporting  ends here ############################################### -->
       <!-- ##################################################################################### -->
@@ -69,6 +69,22 @@
           {{ $gf.me? 'Log Out' : 'Log In' }}
         </button>
       </p>
+      <!-- ###########################  form for requesting a username ####################### -->
+      <div id="username-request">
+        <h3>Request Username</h3>
+        <form @submit.prevent="requestUsername">
+          <label for="requestedUsername">Username:</label>
+          <input
+            type="text"
+            id="requestedUsername"
+            v-model="requestedUsername"
+            required
+          />
+          <button type="submit">Request</button>
+        </form>
+        <p>{{ requestUsernameResult }}</p>
+      </div>
+      <!-- ###########################  form for requesting a username End ####################### -->
 
       <!-- If we're not logged in, hide everything except the login button -->
       <template v-if="$gf.me">
@@ -77,6 +93,7 @@
           <!-- reusable <name></name> component. -->
           <!-- See below for the template. -->
           My Name Is: <name :actor="$gf.me" :editable="true"></name>
+          <span class="username">{{ username }}</span>
         </p>
 
         <!-- ######################################### 1 ########################################### -->
@@ -95,22 +112,24 @@
           :class="{ 'selected': privateMessaging, 'has-new-messages': unreadMessages }"
           @click="privateMessaging = true"
         >
-          Private Messaging
+          Private Messaging <br />
+          <label for="searchUsername">Search Username:</label>
+          <input type="text" id="searchUsername" v-model="searchUsername" />
+          <ul
+            v-if="searchUsername && filteredUsernames.length"
+            class="autocomplete-dropdown"
+          >
+            <li
+              v-for="username in filteredUsernames"
+              @click="selectUsername(username)"
+            >
+              {{ username }}
+            </li>
+          </ul>
+          <button @click="searchForActor">Search</button>
+          <span v-if="searching" class="loading-spinner"></span>
+          <p>{{ searchResultMessage }}</p>
         </div>
-        <!-- <button
-          class="chat-toggle"
-          :class="{ 'selected': !privateMessaging }"
-          @click="privateMessaging = false"
-        >
-          Public Chat
-        </button>
-        <button
-          class="chat-toggle"
-          :class="{ 'selected': privateMessaging }"
-          @click="privateMessaging = true"
-        >
-          Private Messaging
-        </button> -->
 
         <!-- ##################################################################################### -->
         <!-- #####################################   Change ends here ############################ -->
@@ -118,18 +137,22 @@
 
         <p v-if="!privateMessaging">
           <label for="channel"> Change the channel you're chatting in: </label>
-          <input id="channel" v-model="channel" />
+          <input type="text" id="channel" v-model="channel" />
         </p>
         <p v-else>
           <label for="recipient">
             Paste the Actor ID of who you'd like to chat with:
           </label>
-          <input id="recipient" v-model="recipient" />
+          <input type="text" id="recipient" v-model="recipient" />
         </p>
 
         <!-- A form for sending messages -->
         <form @submit.prevent="sendMessage">
-          <input v-model="messageText" placeholder="Type a message..." />
+          <input
+            type="text"
+            v-model="messageText"
+            placeholder="Type a message..."
+          />
           <input type="submit" value="Send" />
         </form>
 
