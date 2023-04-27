@@ -1,0 +1,161 @@
+/* General Styling */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #b4fad8;
+  margin: 0;
+  padding: 0;
+}
+
+/* Container Styling */
+#app {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1rem;
+  background-color: #ffffff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+}
+
+/* Heading Styling */
+h1 {
+  color: #333;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+/* Form & Input Styling */
+form {
+  display: flex;
+  align-items: center;
+}
+
+input[type="text"],
+input[type="submit"] {
+  font-size: 1rem;
+  padding: 0.5rem;
+  border-radius: 5px;
+}
+
+input[type="text"] {
+  flex: 1;
+  margin-right: 0.5rem;
+  border: 1px solid #ccc;
+}
+
+input[type="submit"] {
+  background-color: #4caf50;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+input[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+input[type="radio"] {
+  margin: 0 0.5rem;
+}
+
+/* Message List */
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+/* Message Styling */
+li {
+  background-color: #f1f1f1;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 5px;
+}
+
+/* Button Styling */
+button {
+  background-color: #4caf50;
+  border: none;
+  color: white;
+  padding: 0.5rem 1rem;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1rem;
+  margin: 0.2rem 0;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+/* Name Styling */
+span {
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Edit Name Button */
+span button {
+  margin-left: 0.5rem;
+}
+
+/* ################### toggle button style ############## */
+.chat-toggle {
+  background-color: #77a279;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  margin: 4px;
+  padding: 8px 12px;
+  transition: background-color 0.3s ease;
+}
+
+.chat-toggle.selected {
+  background-color: #45a049;
+  font-weight: bold;
+}
+
+.chat-toggle:not(.selected):hover {
+  background-color: #89e0c1;
+}
+
+/* #################### Help Style ##################### */
+.help-button {
+  background-color: #45a049;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-bottom: 8px;
+  padding: 8px 12px;
+  transition: background-color 0.3s ease;
+}
+
+.help-button:hover {
+  background-color: #89e0c1;
+}
+
+.help-section {
+  background-color: rgba(199, 243, 217, 0.9);
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 16px;
+  padding: 12px;
+  position: absolute;
+  width: 80%;
+  z-index: 1;
+}
+
+.help-section p {
+  margin: 0 0 8px;
+}
+
+.help-section ul {
+  list-style-type: disc;
+  margin: 0;
+  padding-left: 24px;
+}

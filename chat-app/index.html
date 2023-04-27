@@ -1,139 +1,188 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <script type="module" src="./chat.js"></script>
-</head>
-<body>
-  <div id="app">
-    <h1>
-      My Cool Chat App
-    </h1>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Let's Chat</title>
+    <link rel="stylesheet" href="style.css" />
 
-    <p>
-      <button @click="$gf.toggleLogIn">
-        <!-- If we have a user ID, we're logged in so show "Log Out" -->
-        <!-- Otherwise, show "Log In" -->
-        {{ $gf.me? 'Log Out' : 'Log In' }}
+    <script type="module" src="./chat.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <h1>Let's Chat</h1>
+
+      <!-- ######################################### 3 ########################################### -->
+      <!-- #######################  Error Reporting  ############################################### -->
+      <!-- ##################################################################################### -->
+      <transition name="fade">
+        <div v-if="errorMessage" class="error-message">{{ errorMessage }}</div>
+      </transition>
+      <!-- #################################################################################### -->
+      <!-- #######################  Error Reporting  ends here #####################################-->
+      <!-- ##################################################################################### -->
+
+      <!-- ######################################### 2 ########################################### -->
+      <!-- #######################  Help section ############################################### -->
+      <!-- ##################################################################################### -->
+      <button @click="showHelp = !showHelp" class="help-button">
+        {{ showHelp ? "Hide Help" : "Show Help" }}
       </button>
-    </p>
-
-    <!-- If we're not logged in, hide everything except the login button -->
-    <template v-if="$gf.me">
-
-      <p>
-        <!-- We display names in multiple places, so we made a -->
-        <!-- reusable <name></name> component. -->
-        <!-- See below for the template. -->
-        My Name Is: <name :actor="$gf.me" :editable="true"></name>
-      </p>
-
-      <p>
-        Change chat format:
-        <input type="radio" id="channel" :value="false" v-model="privateMessaging" />
-        <label for="channel">Channel-based public chat</label>
-
-        <input type="radio" id="pm" :value="true" v-model="privateMessaging" />
-        <label for="pm">Private Messaging</label>
-      </p>
-
-      <p v-if="!privateMessaging">
-        <label for="channel">
-          Change the channel you're chatting in:
-        </label>
-        <input id="channel" v-model="channel"/>
-      </p>
-      <p v-else>
-        <label for="recipient">
-          Paste the Actor ID of who you'd like to chat with:
-        </label>
-        <input id="recipient" v-model="recipient"/>
-      </p>
-
-      <!-- A form for sending messages -->
-      <form @submit.prevent="sendMessage">
-        <input v-model="messageText" placeholder="Type a message..."/>
-        <input type="submit" value="Send"/>
-      </form>
-
-      <ul>
-        <!-- List all the messages -->
-        <li v-for="message of messages" :key="message.id">
-
-          <!-- Display and edit form if we're editing a message -->
-          <form v-if="editID==message.id" @submit.prevent="saveEditMessage(message)">
-            <input v-model="editText">
-            <input type="submit" value="Save"/>
-          </form>
-
-          <!-- Otherwise, display a bunch of properties from the message -->
-          <ul v-else>
+      <transition name="fade">
+        <div v-if="showHelp" class="help-section">
+          <p>
+            <strong>How to use the chat app:</strong>
+          </p>
+          <ul>
+            <li>Click the "Log In" button to log in or out.</li>
             <li>
-              Message: {{ message.content }} 
+              Choose between "Public chat" and "Private Messaging" by clicking
+              the respective buttons.
             </li>
             <li>
-              From Name: <name :actor="message.actor"></name>
+              For public chat, enter the channel name you want to chat in. For
+              private messaging, enter the Actor ID of the person you want to
+              chat with.
             </li>
             <li>
-              From Actor ID: {{ message.actor }}
-            </li>
-            <template v-if="privateMessaging">
-              <li>
-                To Name: <name :actor="message.bto[0]"></name>
-              </li>
-              <li>
-                To Actor ID: {{ message.bto[0] }}
-              </li>
-            </template>
-            <li>
-              Published at Time: {{ message.published }}
+              Type your message in the input field and click "Send" to send the
+              message.
             </li>
             <li>
-              Last Edited at Time: {{ message.updated }}
+              Click "Edit Message" or "Delete Message" to edit or delete your
+              messages.
             </li>
-            <li>
-              <!-- This is a unique identifier that can be used to "link" to messages -->
-              ID: {{ message.id }}
-            </li>
-
-            <!-- Only add these controls if the message is ours -->
-            <!-- You can't edit or delete other people's messages -->
-            <template v-if="message.actor==$gf.me">
-              <li>
-                <button @click="removeMessage(message)">
-                  Delete Message
-                </button>
-              </li>
-              <li>
-                <button @click="startEditMessage(message)">
-                  Edit Message
-                </button>
-              </li>
-            </template>
+            <li>Click "Edit Name" to change your display name.</li>
           </ul>
-        </li>
-      </li>
+        </div>
+      </transition>
+
+      <!-- ##################################################################################### -->
+      <!-- #####################################   Change ends here ############################ -->
+      <!-- ##################################################################################### -->
+
+      <p>
+        <button @click="$gf.toggleLogIn">
+          <!-- If we have a user ID, we're logged in so show "Log Out" -->
+          <!-- Otherwise, show "Log In" -->
+          {{ $gf.me? 'Log Out' : 'Log In' }}
+        </button>
+      </p>
+
+      <!-- If we're not logged in, hide everything except the login button -->
+      <template v-if="$gf.me">
+        <p>
+          <!-- We display names in multiple places, so we made a -->
+          <!-- reusable <name></name> component. -->
+          <!-- See below for the template. -->
+          My Name Is: <name :actor="$gf.me" :editable="true"></name>
+        </p>
+
+        <!-- ######################################### 1 ########################################### -->
+        <!-- #######################  substitue radio button with more interactive toggle ############## -->
+        <!-- ##################################################################################### -->
+
+        <button
+          class="chat-toggle"
+          :class="{ 'selected': !privateMessaging }"
+          @click="privateMessaging = false"
+        >
+          Public Chat
+        </button>
+        <button
+          class="chat-toggle"
+          :class="{ 'selected': privateMessaging }"
+          @click="privateMessaging = true"
+        >
+          Private Messaging
+        </button>
+
+        <!-- ##################################################################################### -->
+        <!-- #####################################   Change ends here ############################ -->
+        <!-- ##################################################################################### -->
+
+        <p v-if="!privateMessaging">
+          <label for="channel"> Change the channel you're chatting in: </label>
+          <input id="channel" v-model="channel" />
+        </p>
+        <p v-else>
+          <label for="recipient">
+            Paste the Actor ID of who you'd like to chat with:
+          </label>
+          <input id="recipient" v-model="recipient" />
+        </p>
+
+        <!-- A form for sending messages -->
+        <form @submit.prevent="sendMessage">
+          <input v-model="messageText" placeholder="Type a message..." />
+          <input type="submit" value="Send" />
+        </form>
+
+        <ul>
+          <!-- List all the messages -->
+          <li v-for="message of messages" :key="message.id">
+            <!-- Display and edit form if we're editing a message -->
+            <form
+              v-if="editID==message.id"
+              @submit.prevent="saveEditMessage(message)"
+            >
+              <input v-model="editText" />
+              <input type="submit" value="Save" />
+            </form>
+
+            <!-- Otherwise, display a bunch of properties from the message -->
+            <ul v-else>
+              <li>Message: {{ message.content }}</li>
+              <li>From Name: <name :actor="message.actor"></name></li>
+              <li>From Actor ID: {{ message.actor }}</li>
+              <template v-if="privateMessaging">
+                <li>To Name: <name :actor="message.bto[0]"></name></li>
+                <li>To Actor ID: {{ message.bto[0] }}</li>
+              </template>
+              <li>Published at Time: {{ message.published }}</li>
+              <li>Last Edited at Time: {{ message.updated }}</li>
+              <li>
+                <!-- This is a unique identifier that can be used to "link" to messages -->
+                ID: {{ message.id }}
+              </li>
+
+              <!-- Only add these controls if the message is ours -->
+              <!-- You can't edit or delete other people's messages -->
+              <template v-if="message.actor==$gf.me">
+                <li>
+                  <button @click="removeMessage(message)">
+                    Delete Message
+                  </button>
+                </li>
+                <li>
+                  <button @click="startEditMessage(message)">
+                    Edit Message
+                  </button>
+                </li>
+              </template>
+            </ul>
+          </li>
+        </ul>
+      </template>
+    </div>
+
+    <template id="name">
+      <span v-if="!editing">
+        <!-- If we're not editing the name-->
+        <!-- Display the profile's name, if it exists -->
+        <!-- or anonymous if it doesn't -->
+        {{ profile? profile.name : 'Anonymous' }}
+
+        <!-- Also if the name is "editable" add an edit button -->
+        <button v-if="editable" @click="editName">Edit Name</button>
+      </span>
+
+      <!-- If we're in the editing state, create something to edit the name-->
+      <form v-else @submit.prevent="saveName">
+        <input v-model="editText" />
+        <input type="submit" value="Save Name" />
+      </form>
     </template>
-  </div>
-
-  <template id="name">
-    <span v-if="!editing">
-
-      <!-- If we're not editing the name-->
-      <!-- Display the profile's name, if it exists -->
-      <!-- or anonymous if it doesn't -->
-      {{ profile? profile.name : 'Anonymous' }}
-
-      <!-- Also if the name is "editable" add an edit button -->
-      <button v-if="editable" @click="editName">
-        Edit Name
-      </button>
-    </span>
-
-    <!-- If we're in the editing state, create something to edit the name-->
-    <form v-else @submit.prevent="saveName">
-      <input v-model="editText"/>
-      <input type="submit" value="Save Name"/>
-    </form>
-  </template>
-</body>
+  </body>
 </html>
