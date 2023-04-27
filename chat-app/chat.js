@@ -39,7 +39,7 @@ const app = {
       editText: "",
       recipient: "",
       showHelp: false, // I added this
-      errorMessage: "", // I added this
+      // errorMessage: "", // I added this
     };
   },
 
@@ -91,14 +91,12 @@ const app = {
     // ##################################################################################
     // ###################### Here are the changes I made in methods ####################
     // ##################################################################################
-    handleError(error) {
-      // hadles error and
-      this.errorMessage = error.message;
-      setTimeout(() => {
-        this.errorMessage = "";
-      }, 3000);
-      //  The error message will automatically disappear after 3 seconds.
-    },
+    // handleError(error) {
+    //   this.errorMessage = error.message;
+    //   setTimeout(() => {
+    //     this.errorMessage = "";
+    //   }, 5000);
+    // },
 
     sendMessage(isPrivate) {
       const message = {
@@ -117,15 +115,11 @@ const app = {
     },
 
     // #################################################################
-    // ###################### Change Ends here #########################
+    // ###################### send message update End ####################
     // #################################################################
 
-    async removeMessage(message) {
-      try {
-        await this.$gf.remove(message);
-      } catch (error) {
-        this.handleError(error);
-      }
+    removeMessage(message) {
+      this.$gf.remove(message);
     },
 
     startEditMessage(message) {
