@@ -93,7 +93,6 @@
           <!-- reusable <name></name> component. -->
           <!-- See below for the template. -->
           My Name Is: <name :actor="$gf.me" :editable="true"></name>
-          <span class="username">{{ username }}</span>
         </p>
 
         <!-- ######################################### 1 ########################################### -->
@@ -172,17 +171,16 @@
             <ul v-else>
               <li>Message: {{ message.content }}</li>
               <li>From Name: <name :actor="message.actor"></name></li>
-              <li>From Actor ID: {{ message.actor }}</li>
+              <!-- <li>From Actor ID: {{ message.actor }}</li> -->
               <template v-if="privateMessaging">
                 <li>To Name: <name :actor="message.bto[0]"></name></li>
-                <li>To Actor ID: {{ message.bto[0] }}</li>
+                <!-- <li>To Actor ID: {{ message.bto[0] }}</li> -->
               </template>
               <li>Published at Time: {{ message.published }}</li>
-              <li>Last Edited at Time: {{ message.updated }}</li>
-              <li>
-                <!-- This is a unique identifier that can be used to "link" to messages -->
-                ID: {{ message.id }}
-              </li>
+              <!-- <li>Last Edited at Time: {{ message.updated }}</li> -->
+
+              <!-- This is a unique identifier that can be used to "link" to messages -->
+              <!-- <li>ID: {{ message.id }}</li> -->
 
               <!-- Only add these controls if the message is ours -->
               <!-- You can't edit or delete other people's messages -->

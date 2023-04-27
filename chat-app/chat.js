@@ -110,18 +110,32 @@ const app = {
   methods: {
     async requestUsername() {
       try {
-        const response = await this.$gf.requestUsername(this.requestedUsername);
-        if (response.success) {
-          this.requestUsernameResult = "Username successfully claimed!";
-        } else {
-          this.requestUsernameResult =
-            "Username is already taken. Please try another.";
-        }
-      } catch (error) {
-        this.requestUsernameResult =
-          "Error claiming username. Please try again.";
+        const result = await this.$gf.resolver.requestUsername(
+          this.requestedUsername
+        );
+        this.requestUsernameResult = result
+          ? `Successfully requested username "${this.requestedUsername}"`
+          : `Username "${this.requestedUsername}" is already taken`;
+        this.requestedUsername = "";
+      } catch (err) {
+        console.error(err);
+        this.errorMessage = err.message;
       }
     },
+    // async requestUsername() {
+    //   try {
+    //     const response = await this.$gf.requestUsername(this.requestedUsername);
+    //     if (response.success) {
+    //       this.requestUsernameResult = "Username successfully claimed!";
+    //     } else {
+    //       this.requestUsernameResult =
+    //         "Username is already taken. Please try another.";
+    //     }
+    //   } catch (error) {
+    //     this.requestUsernameResult =
+    //       "Error claiming username. Please try again.";
+    //   }
+    // },
     selectUsername(username) {
       this.searchUsername = username;
     },
@@ -187,11 +201,17 @@ const app = {
     //   //set hasNewMessages to true when new message is sent
     //   this.hasNewMessages = true;
     // },
-
     sendMessage() {
+      if (!this.messageText) {
+        // if message is empty, error message will be displayed
+        alert("Error: Message Cannot be Empty! Please write a message.");
+        return;
+      }
+
       const message = {
         type: "Note",
         content: this.messageText,
+        read: false, // mark new messages as unread
       };
 
       // The context field declares which
@@ -205,9 +225,35 @@ const app = {
         message.context = [this.channel];
       }
 
+      //pay a notification sound
+      const audio = new Audio("new_text.mp3");
+
+      audio.play();
       // Send!
       this.$gf.post(message);
+      // Clear the message text after sending the message
+      this.messageText = "";
     },
+    // sendMessage() {
+    //   const message = {
+    //     type: "Note",
+    //     content: this.messageText,
+    //   };
+
+    //   // The context field declares which
+    //   // channel(s) the object is posted in
+    //   // You can post in more than one if you want!
+    //   // The bto field makes messages private
+    //   if (this.privateMessaging) {
+    //     message.bto = [this.recipient];
+    //     message.context = [this.$gf.me, this.recipient];
+    //   } else {
+    //     message.context = [this.channel];
+    //   }
+
+    //   // Send!
+    //   this.$gf.post(message);
+    // },
 
     // mark all messages as read when the user opens the chat
     markAllAsRead() {
@@ -281,8 +327,14 @@ const Name = {
       );
     },
     username() {
-      return this.actor.split(":").pop();
+      return this.resolver.actorToUsername(this.recipient).catch((error) => {
+        console.error("Error:", error);
+        return ""; // Return an empty string or a default value if needed
+      });
     },
+    // username() {
+    //   return this.actor.split(":").pop();
+    // },
   },
 
   data() {
