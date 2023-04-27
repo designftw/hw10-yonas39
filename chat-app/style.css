@@ -104,7 +104,7 @@ span button {
 
 /* ################### toggle button style ############## */
 .chat-toggle {
-  background-color: #77a279;
+  background-color: #6a726b;
   border: 1px solid #cccccc;
   border-radius: 4px;
   cursor: pointer;
@@ -115,7 +115,7 @@ span button {
 }
 
 .chat-toggle.selected {
-  background-color: #45a049;
+  background-color: #4caf50;
   font-weight: bold;
 }
 
@@ -125,7 +125,7 @@ span button {
 
 /* #################### Help Style ##################### */
 .help-button {
-  background-color: #45a049;
+  background-color: #4caf50;
   border: none;
   border-radius: 4px;
   cursor: pointer;
